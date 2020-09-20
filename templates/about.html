@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block heading %}
+    Блог программиста
+{% endblock %}
+
+{% block content %}
+    <section>
+        <article>
+            <img src="https://rusability.ru/wp-content/uploads/2015/12/gif-prezentatsii.gif" width="100%" height="100%" class="center">
+        </article>
+        <article>
+            Блог Мусаева Мансура, тут будет результы моего программирование
+            <br> 
+            Пока, что-так
+            <br>
+            Пожелайте мне удачи, надеюсь дойти до конца!
+        </article>
+    </section>
+{% endblock %}
+
+{% block footer %}
+    <a href="{{ url_for('index') }}">Контакты</a>
+{% endblock %}
