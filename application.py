@@ -12,6 +12,10 @@ Session(app)
 def about():
     return render_template("about.html")
 
+@app.route("/weather")
+def weather():
+    return render_template("weather.html")
+
 @app.route("/index", methods=["GET","POST"])
 def index():
     if session.get('notes') is None:
