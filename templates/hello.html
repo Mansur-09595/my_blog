@@ -8,3 +8,6 @@
     Hello, {{ message }}!
 {% endblock %}
 
+{% block footer %}
+    <a href="{{ url_for('about') }}">На главную</a>
+{% endblock %}

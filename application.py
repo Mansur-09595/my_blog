@@ -1,3 +1,6 @@
+import requests
+import datetime
+
 from flask import Flask, render_template, request, session
 from flask_session import Session
 
@@ -7,14 +10,41 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+WEATHER_TOKEN = '1e35d2f152ba4f4f8e0175010202109'
 
 @app.route("/")
 def about():
     return render_template("about.html")
 
-@app.route("/weather")
+
+
+def weather_by_city():
+    weather_url = 'http://api.worldweatheronline.com/premium/v1/weather.ashx'
+    params = {
+        'key': WEATHER_TOKEN,
+        'q': 'Grozny, Russia',
+        'format': 'json',
+        'num_of_days': 1,
+        'lang': 'ru'
+    }
+    result = requests.get(weather_url, params=params)
+    return result.json()
+
+@app.route("/weather", methods=["GET","POST"])
 def weather():
-    return render_template("weather.html")
+    weather = weather_by_city()
+    degrees = {
+        9: weather['data']['weather'][0]['hourly'][2]['tempC'],
+        12: weather['data']['weather'][0]['hourly'][3]['tempC'],
+        15: weather['data']['weather'][0]['hourly'][3]['tempC'],
+        18: weather['data']['weather'][0]['hourly'][3]['tempC']
+    }
+    day = weather[ 'data']['weather'][0]['date']
+    msg = f'Сегодня {day} погода ожидается следующая: в 9:00 {degrees[9]}°C,\
+        в 12:00 {degrees[12]}°C в 15:00 {degrees[15]}°C, в 18:00 {degrees[18]}°C'
+    time = time=datetime.datetime.strptime('09:12AM', '%I:%M%p').time()
+    return render_template( "weather.html", text=msg, time=time)
+
 
 @app.route("/index", methods=["GET","POST"])
 def index():

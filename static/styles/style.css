@@ -65,3 +65,11 @@ a, ul{
 a{
   margin: 220px;
 }
+
+.weather{
+    margin: 43px;
+    font-size: 28px;
+    font-variant-caps: all-petite-caps;
+    font-family: cursive;
+    color: black;
+}
