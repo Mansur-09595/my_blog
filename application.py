@@ -34,14 +34,15 @@ def weather_by_city():
 def weather():
     weather = weather_by_city()
     degrees = {
-        9: weather['data']['weather'][0]['hourly'][2]['tempC'],
-        12: weather['data']['weather'][0]['hourly'][3]['tempC'],
-        15: weather['data']['weather'][0]['hourly'][3]['tempC'],
-        18: weather['data']['weather'][0]['hourly'][3]['tempC']
+        9: weather['data']['weather'][0]['hourly'][3]['tempC'],
+        12: weather['data']['weather'][0]['hourly'][4]['tempC'],
+        15: weather['data']['weather'][0]['hourly'][5]['tempC'],
+        18: weather['data']['weather'][0]['hourly'][6]['tempC'],
+        21: weather['data']['weather'][0]['hourly'][7]['tempC']
     }
     day = weather[ 'data']['weather'][0]['date']
     msg = f'Сегодня {day} погода ожидается следующая: в 9:00 {degrees[9]}°C,\
-        в 12:00 {degrees[12]}°C в 15:00 {degrees[15]}°C, в 18:00 {degrees[18]}°C'
+        в 12:00 {degrees[12]}°C в 15:00 {degrees[15]}°C, в 18:00 {degrees[18]}°C, в 21:00 {degrees[21]}°C'
     time = time=datetime.datetime.strptime('09:12AM', '%I:%M%p').time()
     return render_template( "weather.html", text=msg, time=time)
 

@@ -5,7 +5,25 @@
 {% endblock %}
 
 {% block content %}
-    <div class="weather">Погода в Грозном,{{ text }}!</div>
+    <section class="weather_two_box">
+        <article class="weather">
+            Погода в Грозном,{{ text }}!
+        </article>
+        <article id="a1d2bd486864c86dd3357ef023bb2406" class="ww-informers-box-854753">
+            <p class="ww-informers-box-854754">
+                <a href="https://world-weather.ru/pogoda/russia/grozny/14days/">Подробный прогноз</a>
+                <br><a href="https://world-weather.ru/pogoda/russia/izhevsk/">Подробный прогноз</a>
+            </p>
+        </article>
+        <script async type="text/javascript" charset="utf-8" src="https://world-weather.ru/wwinformer.php?userid=a1d2bd486864c86dd3357ef023bb2406"></script>
+        <style>.ww-informers-box-854754{
+            -webkit-animation-name:ww-informers54;animation-name:ww-informers54;-webkit-animation-duration:1.5s;animation-duration:1.5s;white-space:nowrap;
+            overflow:hidden;-o-text-overflow:ellipsis;text-overflow:ellipsis;font-size:12px;font-family:Arial;line-height:18px;text-align:center
+            }
+            @-webkit-keyframes ww-informers54{0%,80%{opacity:0}100%{opacity:1}}
+            @keyframes ww-informers54{0%,80%{opacity:0}100%{opacity:1}}
+        </style>
+    </section>
 {% endblock %}
 
 {% block footer %}

@@ -12,3 +12,10 @@ env/
 .idea/
 .vscode/
 flask_session/
+
+
+__pycache__
+/env/
+/.idea/
+/.vscode/
+/flask_session/

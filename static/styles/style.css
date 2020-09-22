@@ -23,14 +23,14 @@ main{
   box-shadow: 5px 5px 5px 5px;
 }
 
-section{
+section, .weather_two_box{
   max-width: 100%;
   width: 1200px;
   margin: auto;
   box-sizing: border-box;
   overflow: hidden;
 }
-article{
+.gif{
   font-family: cursive;
   max-width: 100%;
   width: 50%;
@@ -66,10 +66,27 @@ a{
   margin: 220px;
 }
 
-.weather{
+/* .weather{
     margin: 43px;
     font-size: 28px;
     font-variant-caps: all-petite-caps;
     font-family: cursive;
     color: black;
+} */
+
+ .weather{
+    width: 100%;
+    font-family: cursive;
+    max-width: 100%;
+    box-sizing: border-box;
+    height: 250px;
+    font-variant-caps: all-petite-caps;
+    padding: 30px;
+    font-size: 30px;
+}
+
+.ww-informers-box-854753{
+  width: 1385px;
+  margin: -170px;
+  margin-top: -264px;
 }
