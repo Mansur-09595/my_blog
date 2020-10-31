@@ -7,16 +7,10 @@
 {% block content %}
     
     
-    <form  action="{{ url_for('hello') }}" method="post">
+    <form  action="{{ url_for('index') }}" method="post">
         <input type="text" name="name" placeholder="Введите ваше Имя">
-        <button>Отправить</button>
-    </form>
-    <form action="{{ url_for('hello') }}" method="post">
-        <input type="text" name="name" placeholder="Введите ваш @mail">
-        <button>Отправить</button>
-    </form>
-    <form action="{{ url_for('index') }}"  method="post">
-        <input type="text" name="note" placeholder="Оставьте отзыв">
+        <input type="text" name="mail" placeholder="Введите ваш @mail">
+        <input type="text" name="commen" placeholder="Оставьте отзыв">
         <button>Отправить</button>
     </form>
 {% endblock %}
@@ -27,6 +21,11 @@
             <li>{{ note }}</li>
         {% endfor %}
     </ul>
-
+    <ul>
+        {% for flight in flights %}
+            <li class="li">{{ flight.name }} : {{ flight.commen }}</li>
+            <!-- {{ "%s %s"|format(flight.id, flight.origin) }}[1:-1]|replace('"', ' ') -->
+        {% endfor %}
+    </ul>
     <a href="{{ url_for('about') }}">На главную</a>
 {% endblock %}

@@ -5,25 +5,23 @@ import requests
 from flask import Flask, render_template, request, session
 from flask_session import Session
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
+# from sqlalchemy import create_engine
+# from sqlalchemy.orm import scoped_session, sessionmaker
 
-engine = create_engine('postgresql://mans:flask@localhost/mans')
-db = scoped_session(sessionmaker(bind=engine))
-
+from models import *
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://mans:flask@localhost/mans"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db.init_app(app)
 
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
 
 WEATHER_TOKEN = '1e35d2f152ba4f4f8e0175010202109'
+
 
 @app.route("/")
 def about():
     return render_template("about.html")
-
 
 
 def weather_by_city():
@@ -37,6 +35,7 @@ def weather_by_city():
     }
     result = requests.get(weather_url, params=params)
     return result.json()
+
 
 @app.route("/weather", methods=["GET","POST"])
 def weather():
@@ -66,31 +65,15 @@ def hello():
 
 @app.route("/index", methods=["GET","POST"])
 def index():
-    if session.get('notes') is None:
-        session['notes'] = []
     if request.method == "POST":
-        note = request.form.get("note")
-        comment = note
-        session['notes'].append(note)
-        with open('comment.txt', 'w', encoding="utf-8") as comment_file:
-            comment_file.write(comment)
-        f = open("comment.txt")
-        reader = csv.reader(f)
-        for origin in reader:
-            db.execute("INSERT INTO flights (origin) VALUES (:origin)",
-                        {"origin":origin})
-        db.commit()   
-    return render_template("index.html", notes=session['notes'])
-
-
-# @app.route("/hello", methods=["POST"])
-# def hello():
-#     f = open("text.txt")
-#     reader = csv.reader(f)
-#     for origin, destination, duration in reader:
-#         db.execute("INSERT INTO flights (origin, destination, duration,) VALUES (:origin, :destination, :duration)",
-#                     {"origin":origin, "destination":destination, "duration":duration})
-#     db.commit()
+        name = request.form.get('name')
+        mail = request.form.get('mail')
+        commen = request.form.get('commen')
+        comm = Flight(name=name, mail=mail, commen=commen)
+        db.session.add(comm)
+    flights = Flight.query.all()
+    db.session.commit()
+    return render_template("index.html", flights=flights)
 
 
 if __name__ == "__main__":

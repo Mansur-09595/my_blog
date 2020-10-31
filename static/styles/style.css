@@ -58,6 +58,13 @@ form, ul, b{
   color: black;
 }
 
+.li{
+  width: auto;
+  border: inset;
+  background-color: #151538;
+  padding: 25px
+}
+
 a, ul{
   color: white;
 }
